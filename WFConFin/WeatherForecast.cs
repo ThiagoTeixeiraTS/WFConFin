@@ -1,3 +1,5 @@
+using System;
+
 namespace WFConFin
 {
     public class WeatherForecast

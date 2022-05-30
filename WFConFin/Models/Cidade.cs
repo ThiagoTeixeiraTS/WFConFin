@@ -1,7 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WFConFin.Models
 {
+
+
     public class Cidade
     {
         [Key]
@@ -20,6 +25,8 @@ namespace WFConFin.Models
         {
             Id = Guid.NewGuid();
         }
+
+        [JsonIgnore]
 
         //Relacionamento Entity Framework
         public Estado Estado { get; set; }

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WFConFin.Models
 {
@@ -30,13 +32,14 @@ namespace WFConFin.Models
         [StringLength(20, ErrorMessageResourceName = "Campo Genero deve ter até 20 caracteres")]
         public string Genero { get; set; }
 
-        public Guid CidadeId { get; set; }
+        public Guid? CidadeId { get; set; }
 
         public Pessoa()
         {
             Id = new Guid();
         }
         //Relacionamento Entity Framework
+        [JsonIgnore]
 
         public Cidade Cidade { get; set; }
     }
