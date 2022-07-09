@@ -166,15 +166,20 @@ namespace WFConFin.Controllers
         }
 
         [HttpGet("Paginacao")]
-        public async Task<IActionResult> GetEstadoPaginacao([FromQuery] string valor, int skip, int take, bool order)
+        public async Task<IActionResult> GetEstadoPaginacao([FromQuery] string? valor, int skip, int take, bool order)
         {
             try
             {
+
                 var lista = from o in _dbContext.Estado.ToList()
+                          select o;
+                if (!string.IsNullOrEmpty(valor))
+                { 
+                        lista = from o in lista
                             where o.Sigla.ToUpper().Contains(valor.ToUpper())
                             || o.Nome.ToUpper().Contains(valor.ToUpper())
                             select o;
-             
+                }
 
                 if (order)
                 {
@@ -190,7 +195,7 @@ namespace WFConFin.Controllers
                 }
                 var qtd = lista.Count();
                 
-                lista = lista.Skip(skip).Take(take).ToList();
+                lista = lista.Skip(((skip - 1)*take)).Take(take).ToList();
 
                 var paginacaoResponse = new PaginacaoResponse<Estado>(lista, qtd, skip, take);
 

@@ -19,7 +19,7 @@ namespace WFConFin.Models
         public string Login { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 3)]
         public string Password { get; set; }
 
 
